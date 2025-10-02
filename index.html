@@ -1583,10 +1583,16 @@
                 mobilePreview.classList.remove('active');
             }
 
-            // UPDATED: Fullscreen functionality - Now properly shows the preview
+            // FIXED: Fullscreen functionality - Now properly shows the preview with current code
             fullscreenBtn.addEventListener('click', function() {
-                // Generate the preview document from current code
-                const previewDocument = generateCombinedCode();
+                const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
+                let previewDocument;
+                
+                if (activeTab === 'combined') {
+                    previewDocument = combinedCode.value;
+                } else {
+                    previewDocument = generateCombinedCode();
+                }
                 
                 // Create a new window with the preview
                 const newWindow = window.open('', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
